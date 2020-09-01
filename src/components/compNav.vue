@@ -9,7 +9,7 @@
         <li class="nav-item"><a class="nav-link" href="#">Shops</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Pages</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contact?</a></li>
       </ul>
       <div class="col-xl-3 nav-phone">
             <span class="nav-phone-icon"><i class="fas fa-phone"></i> </span> &nbsp;&nbsp;
