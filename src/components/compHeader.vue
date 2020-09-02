@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container d-none d-lg-flex" >
+  <div class="header-container d-none d-lg-flex">
     <div class="  container-lg container-xl">
       <div class="row">
         <div class="col-lg-3 col-xl-3 header-line">
@@ -12,11 +12,13 @@
           <span class=" header-icon"> <i class="fab fa-facebook"></i></span>
           <span class=" header-icon"> <i class="fab fa-twitter"></i></span>
           <span class=" header-icon"> <i class="fab fa-google "></i></span>
-          <span class=" header-icon">
-            <i class="fab fa-instagram-square"></i
+          <span class=" header-icon"
+            ><i class="fab fa-instagram-square"></i
           ></span>
         </div>
-        <div class=" col-lg-1 col-xl-1 header-login"><i class="fas fa-user"></i>&nbsp; login</div>
+        <div class=" col-lg-1 col-xl-1 header-login">
+          <i class="fas fa-user"></i>&nbsp; login
+        </div>
       </div>
     </div>
   </div>
@@ -31,7 +33,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header-container {
   font-size: 1.2rem;
   background-color: #f5f5f5;
@@ -54,8 +56,8 @@ export default {
   transition: 0.2s;
   background-color: #4caf50;
 }
-.header-login:hover{
- color: white;
+.header-login:hover {
+  color: white;
   cursor: pointer;
   transition: 0.2s;
   color: #4caf50;
