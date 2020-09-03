@@ -1,6 +1,6 @@
-import homeCompAllProducts from '../docs/home/homeCompAllProducts'
+import home from '../docs/home/home'
 import shopComp from '../docs/shop/shopComp'
 export default [
-    { path: '/', component: homeCompAllProducts },
+    { path: '/', component: home },
     { path: '/shop', component: shopComp }
 ]

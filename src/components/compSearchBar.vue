@@ -25,7 +25,7 @@
             <a class="nav-link" href="#">Fruit & nut Gifts</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="#">Ocean foods</a>
+            <a class="nav-link" href="#">Fresh Berries</a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="#">Butter & Eggs</a>
