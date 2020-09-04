@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container home-p-container">
     <div class="title-all-products">
       <p style="border-bottom: thin solid black; cursor: pointer;">
         All products type
@@ -110,6 +110,10 @@ export default {
 </script>
 
 <style scoped>
+.home-p-container {
+  display: block;
+  margin-top: auto;
+}
 .title-all-products {
   display: flex;
   justify-content: center;
@@ -122,7 +126,7 @@ export default {
 }
 .all-products-carousel {
   flex-wrap: nowrap;
-  position: relative;
+
   transition: 0.5s;
 }
 .arrow {

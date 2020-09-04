@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container-header">
+    <div class="mb-5">
       <compHeader></compHeader>
       <compNav></compNav>
       <compSearchBar></compSearchBar>
@@ -17,9 +17,7 @@ import compSearchBar from "./components/compSearchBar";
 export default {
   name: "app",
   data() {
-    return {
-     
-    }
+    return {};
   },
   components: {
     compHeader,
@@ -34,6 +32,7 @@ export default {
   font-family: "Alegreya Sans";
 }
 .container-header {
-  height: 75rem;
+  
 }
+
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container search-nav-container">
     <div class="row">
-      <div class="mb-4 col-xl-3 row department-container ">
+      <div class="mb-4 col-xl-3  department-container ">
         <div
           class="row col-xl-12 search-all-departments"
           @click="activeCollapse"
@@ -10,7 +10,6 @@
           <div class="col-8">All departments</div>
           <div class="col-2"><i class="fas fa-sort-down"></i></div>
         </div>
-
         <ul
           class="nav flex-column departments-collapse "
           id="allDepartmentsCollapse"
@@ -47,23 +46,27 @@
           </li>
         </ul>
       </div>
-      <div class="col-xl-9 ml-xl-5 row search-bar">
-        <div class="all-catagories col-2 d-none d-md-block ">
-          All catagories
+      <div class="col-xl-9 pl-5 pr-5" >
+        <!----bug----->
+        <div class="row search-bar ">
+          <div class="all-catagories col-2 d-none d-md-block ">
+            All catagories
+          </div>
+          <input
+            type="text"
+            class="search-bar-input col-10 col-md-8"
+            placeholder="What do you need? ..."
+          />
+          <div class="btn btn-success col-2 search-bar-btn-input">Search</div>
+          <!----->
+          <div class="col-xl-12 mt-4 bg-under-search"></div>
         </div>
-        <input
-          type="text"
-          class="search-bar-input col-10 col-md-8"
-          placeholder="What do you need? ..."
-        />
-        <div class="btn btn-success col-2 search-bar-btn-input">Search</div>
-        <!----->
-        <div class="col-xl-12 mt-4 bg-under-search">
+        <div class="test">
           <div
             id="demo"
             class="carousel slide"
             data-ride="carousel"
-            style="width: 101.7%"
+            style="width: 101.7%; margin: 0;"
           >
             <!-- The slideshow -->
             <div class="carousel-inner">
@@ -88,7 +91,7 @@
                   width="100%"
                   height="500"
                 />
-                  <div class="carousel-caption">
+                <div class="carousel-caption">
                   <p class="title-caption-img">Seafood</p>
                   <h1>Food from Ocean</h1>
                   <h1>100% fresh</h1>
@@ -102,7 +105,7 @@
                   width="100%"
                   height="500"
                 />
-                  <div class="carousel-caption">
+                <div class="carousel-caption">
                   <p class="title-caption-img">Meat fresh</p>
                   <h1>Meat</h1>
                   <h1>100% Healthy</h1>
@@ -151,8 +154,12 @@ export default {
 </script>
 
 <style scoped>
+.test {
+  margin-top: 1rem;
+  margin-left: -1.5rem;
+}
 .department-container {
-  padding: 0;
+  
 }
 .search-all-departments {
   align-items: center;
@@ -172,10 +179,10 @@ export default {
 .search-bar {
   border: thin solid #dddddd;
   font-size: 1.5rem;
-  height: 5rem;
   display: flex;
   align-items: center;
   padding-right: 0;
+  height: 5rem;
 }
 .all-catagories {
   font-weight: bold;
@@ -203,6 +210,7 @@ export default {
   align-items: center;
   overflow: hidden;
   height: 0;
+
 }
 .nav {
   width: 100%;
