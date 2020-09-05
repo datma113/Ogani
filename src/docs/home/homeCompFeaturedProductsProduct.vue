@@ -49,7 +49,6 @@ export default {
   height: 35rem;
   flex-direction: column;
   align-items: center;
-
 }
 .product:hover {
  
@@ -71,6 +70,7 @@ export default {
   background-color: #f5f5f5;
   border: 1px solid #DDDDDD;
   transition: 0.3s;
+
 
 }
 .product-border:hover {

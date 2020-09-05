@@ -82,7 +82,7 @@ export default {
     // }
 
     resetCarouselWhenResponsive: function() {
-       //get element of img and img container
+      //get element of img and img container
       let widthOfEachImg = document.getElementById("imgCarousel0");
       let allProductsCarousel = document.getElementById("allProductsCarousel");
       // reset transform when responsive
@@ -98,8 +98,8 @@ export default {
   // },
   computed: {},
   created() {
-  window.addEventListener("resize", this.resetCarouselWhenResponsive);
-},
+    window.addEventListener("resize", this.resetCarouselWhenResponsive);
+  },
   props: {
     listAllProductsType: {
       type: Array,
