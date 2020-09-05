@@ -3,11 +3,14 @@
     <homeCompAllProductsType v-bind:listAllProductsType="listAllProductsType" />
     <homeCompFeaturedProducts
       v-bind:listFeaturedProductsTitle="listFeaturedProductsTitle"
-       v-bind:listFeaturedProducts="listFeaturedProducts" 
+       v-bind:listFeaturedProducts="productsChoosen" 
+       v-on:getDataFromFPTitle="getDataFromFPTitle"
+       v-bind:sumOfNumberProductsInPage="sumOfNumberProductsInPage"
       class="mt-5"
     />
- 
+  
   </div>
+
 </template>
 
 <script>
@@ -28,12 +31,12 @@ export default {
         { id: 6, name: "onion", url: "onion.png" }
       ],
       listFeaturedProductsTitle: [
-        { id: 0, name: "All" },
-        { id: 1, name: "Fruits" },
-        { id: 2, name: "Meat" },
-        { id: 3, name: "Fastfood" },
-        { id: 4, name: "Vegetables" },
-        { id: 5, name: "Eggs" }
+        { id: 0, type: '', name: "All" },
+        { id: 1, type: 'Fruit', name: "Fruits" },
+        { id: 2, type: 'Meat', name: "Meat" },
+        { id: 3, type: 'Fastfood', name: "Fastfood" },
+        { id: 4, type: 'Vegetables', name: "Vegetables" },
+        { id: 5, type: 'Eggs', name: "Eggs" }
       ],
       listFeaturedProducts: [
         { url:'banana1.png' , id: 0, type: "Fruit", name: "Banana", stock: 5, price: 2000, },
@@ -61,11 +64,26 @@ export default {
         { url:'pokemonEggs.png' , id: 22, type: "Eggs", name: "pokemon eggs", stock: 5, price: 99000 },
         { url:'quailEggs.png' , id: 23, type: "Eggs", name: "quail eggs", stock: 5, price: 3000 },
         { url:'monsterEggs.png' , id: 24, type: "Eggs", name: "monster eggs", stock: 5, price: 299000 }
-      ]
+      ],
+      dataFromFPTitle: '',
+      sumOfNumberProductsInPage:  0
     };
   },
   methods: {
-
+    //recieve data from homeCompFeaturedProducts
+    getDataFromFPTitle: function(data) {  
+      this.dataFromFPTitle = data;
+    },
+  
+  },
+  computed:{
+    //filter data from getDataFromFPTitle methods
+    productsChoosen: function(){
+      let data = this.listFeaturedProducts.filter( x => x.type.match(this.dataFromFPTitle) ).length;
+      this.sumOfNumberProductsInPage = Math.ceil(data/8);
+      console.log(this.sumOfNumberProductsInPage);
+      return this.listFeaturedProducts.filter( x => x.type.match(this.dataFromFPTitle) );
+    },
   },
   components: {
     homeCompAllProductsType,
