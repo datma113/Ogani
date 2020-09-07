@@ -196,7 +196,6 @@ export default {
   font-size: 2rem;
 }
 .home-fp-container {
-  border: 2px solid blue;
   height: 73.5rem;
   overflow: hidden;
 }
