@@ -10,6 +10,8 @@
     />
     <homeCompOtherProducts v-bind:listOtherProducts="listOtherProducts" />
     <homeCompLTRProducts v-bind:LTRListProducts="LTRListProducts" />
+    <homeCompBlog v-bind:listBlog="listBlog" />
+    <homeCompFooter/>
   </div>
 </template>
 
@@ -19,6 +21,8 @@ import homeCompFeaturedProducts from "./homeCompFeaturedProducts";
 import homeCompFeaturedProductsProduct from "./homeCompFeaturedProductsProduct";
 import homeCompOtherProducts from "./homeCompOtherProducts";
 import homeCompLTRProducts from "./homeCompLTRProducts";
+import homeCompBlog from "./homeCompBlog";
+import homeCompFooter from './homeCompFooter'
 export default {
   name: "home",
   data() {
@@ -331,7 +335,12 @@ export default {
           id: 2,
           title: "Review Products",
           list: [
-            { id: "R0", url: "ginger.png", name: "ginger Chicago", price: 6000 },
+            {
+              id: "R0",
+              url: "ginger.png",
+              name: "ginger Chicago",
+              price: 6000
+            },
             {
               id: "R1",
               url: "onion.png",
@@ -353,6 +362,35 @@ export default {
               price: 2000
             }
           ]
+        }
+      ],
+      listBlog: [
+        {
+          id: 0,
+          url: "blog1.jpg",
+          date: "9/8/2020",
+          countCmt: "59",
+          title: "Cooking tips make cooking simple",
+          desc:
+            "credo in onum deum lorem lorem lorem ahihihihihi vuiqualavui lalala desc here"
+        },
+         {
+          id: 1,
+          url: "blog2.jpg",
+          date: "9/9/2020",
+          countCmt: "77",
+          title: "Cooking tips make cooking simple",
+          desc:
+            "credo in onum deum lorem lorem lorem ahihihihihi vuiqualavui lalala desc here"
+        },
+         {
+          id: 2,
+          url: "blog3.jpg",
+          date: "9/10/2020",
+          countCmt: "51",
+          title: "Cooking tips make cooking simple",
+          desc:
+            "credo in onum deum lorem lorem lorem ahihihihihi vuiqualavui lalala desc here"
         }
       ],
       dataFromFPTitle: "",
@@ -382,7 +420,9 @@ export default {
     homeCompAllProductsType,
     homeCompFeaturedProducts,
     homeCompOtherProducts,
-    homeCompLTRProducts
+    homeCompLTRProducts,
+    homeCompBlog,
+    homeCompFooter
   }
 };
 </script>

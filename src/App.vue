@@ -31,8 +31,4 @@ export default {
 #app {
   font-family: "Alegreya Sans";
 }
-.container-header {
-  
-}
-
 </style>

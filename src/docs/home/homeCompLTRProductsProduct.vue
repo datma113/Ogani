@@ -18,7 +18,7 @@
         <LTRProduct
           v-for="subProduct in product.list"
           v-bind:key="subProduct.id"
-          class="col-6 mb-3"
+          class="col-6 mb-4"
           v-bind:subProduct="subProduct"
         />
       </div>
