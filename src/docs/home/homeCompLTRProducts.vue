@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
       <div class="row">
-          <homeCompLTRProductsProduct class="col-lg-4" v-for="product in LTRListProducts " v-bind:key="product.id" v-bind:product="product"/>
+          <homeCompLTRProductsProduct class="col-md-6 col-lg-4" v-for="product in LTRListProducts " v-bind:key="product.id" v-bind:product="product"/>
       </div>
   </div>
 </template>

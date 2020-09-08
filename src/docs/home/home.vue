@@ -288,7 +288,7 @@ export default {
               id: "L2",
               url: "carrot.png",
               name: "Carrot Thailand",
-              price: 2000
+              price: 2300
             },
             { id: "L3", url: "milk.png", name: "Milk Long Thanh", price: 2000 },
             { id: "L4", url: "orange.png", name: "Orange France", price: 2000 },
@@ -296,34 +296,34 @@ export default {
               id: "L5",
               url: "pokemonEggs.png",
               name: "Pokemon Japan",
-              price: 2000
+              price: 2050
             }
           ]
         },
-         {
+        {
           id: 1,
           title: "Top Rated Products",
           list: [
-            { id: "L0", url: "apple.png", name: "Apple Chicago", price: 2000 },
+            { id: "T0", url: "pigmeat.png", name: "Pig Meat", price: 2000 },
             {
-              id: "L1",
-              url: "banana1.png",
-              name: "Banana America",
-              price: 2000
+              id: "T1",
+              url: "grape.png",
+              name: "America Banana",
+              price: 4000
             },
             {
-              id: "L2",
-              url: "carrot.png",
-              name: "Carrot Thailand",
-              price: 2000
+              id: "T2",
+              url: "grape.png",
+              name: "Korea Grape",
+              price: 220
             },
-            { id: "L3", url: "milk.png", name: "Milk Long Thanh", price: 2000 },
-            { id: "L4", url: "orange.png", name: "Orange France", price: 2000 },
+            { id: "T3", url: "milk.png", name: "Milk Long Thanh", price: 2000 },
+            { id: "T4", url: "snack.png", name: "Snack", price: 2000 },
             {
-              id: "L5",
+              id: "T5",
               url: "pokemonEggs.png",
               name: "Pokemon Japan",
-              price: 2000
+              price: 400
             }
           ]
         },
@@ -331,23 +331,23 @@ export default {
           id: 2,
           title: "Review Products",
           list: [
-            { id: "L0", url: "apple.png", name: "Apple Chicago", price: 2000 },
+            { id: "R0", url: "ginger.png", name: "ginger Chicago", price: 6000 },
             {
-              id: "L1",
-              url: "banana1.png",
-              name: "Banana America",
-              price: 2000
+              id: "R1",
+              url: "onion.png",
+              name: "America Onion",
+              price: 5000
             },
             {
-              id: "L2",
-              url: "carrot.png",
-              name: "Carrot Thailand",
+              id: "R2",
+              url: "vegetables.png",
+              name: "Thailand vegetables",
               price: 2000
             },
-            { id: "L3", url: "milk.png", name: "Milk Long Thanh", price: 2000 },
-            { id: "L4", url: "orange.png", name: "Orange France", price: 2000 },
+            { id: "R3", url: "milk.png", name: "Milk Long Thanh", price: 2000 },
+            { id: "R4", url: "milk.png", name: "Milk Long Thanh", price: 2000 },
             {
-              id: "L5",
+              id: "R5",
               url: "pokemonEggs.png",
               name: "Pokemon Japan",
               price: 2000

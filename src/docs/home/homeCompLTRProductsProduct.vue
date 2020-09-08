@@ -1,5 +1,5 @@
 <template>
-  <div class="LTR-container">
+  <div class="LTR-container mt-5">
     <div class="row">
       <div class="col-8 LTR-title">
         {{ product.title }}
@@ -8,13 +8,13 @@
         <span class="icon" @click="preCarousel">
           <i class="fas fa-chevron-left fa-2x"></i>
         </span>
-        <span class="icon" @click="nextCarousel()">
+        <span class="icon" @click="nextCarousel">
           <i class="fas fa-chevron-right fa-2x"></i>
         </span>
       </div>
     </div>
     <div class="list-container" v-bind:id="`listContainer`">
-      <div class="list-carousel row" id="listCarousel">
+      <div class="list-carousel row" v-bind:id="`listCarousel${product.id}`">
         <LTRProduct
           v-for="subProduct in product.list"
           v-bind:key="subProduct.id"
@@ -23,6 +23,7 @@
         />
       </div>
     </div>
+   
   </div>
 </template>
 
@@ -45,12 +46,12 @@ export default {
   methods: {
     nextCarousel: function() {
       if (this.indexOfCarousel === 1) {
-        let carousel = document.getElementById("listCarousel");
+        let carousel = document.getElementById(`listCarousel${this.product.id}`);
         let getWidth = document.getElementById(`listContainer`);
         carousel.style.transform += `translateX(${getWidth.clientWidth}px)`;
         this.indexOfCarousel = 0;
       } else {
-        let carousel = document.getElementById("listCarousel");
+        let carousel = document.getElementById(`listCarousel${this.product.id}`);
         let getWidth = document.getElementById("listContainer");
         carousel.style.transform += `translateX(${-getWidth.clientWidth}px)`;
         this.indexOfCarousel++;
@@ -58,23 +59,28 @@ export default {
     },
     preCarousel: function() {
       if (this.indexOfCarousel === 0) {
-        let carousel = document.getElementById("listCarousel");
+        let carousel = document.getElementById(`listCarousel${this.product.id}`);
         let getWidth = document.getElementById("listContainer");
         carousel.style.transform += `translateX(${-getWidth.clientWidth}px)`;
         this.indexOfCarousel = 1;
       } else {
-        let carousel = document.getElementById("listCarousel");
+        let carousel = document.getElementById(`listCarousel${this.product.id}`);
         let getWidth = document.getElementById("listContainer");
         carousel.style.transform += `translateX(${getWidth.clientWidth}px)`;
-        this, this.indexOfCarousel--;
+        this.indexOfCarousel--;
       }
     },
-    getDataProps: function() {
-        let data = {
-            data: this.product
-        };
-       return data.data;
+    resetWhenRes: function() {
+        let carousel = document.getElementsByClassName("list-carousel");
+        let getWidth = document.getElementsByClassName("list-container");
+        for( let i = 0; i < carousel.length; i++) {
+          carousel[i].style.transform = `translateX(0)`;
+        }
+          this.indexOfCarousel = 0;    
     }
+  },
+  mounted() {
+    window.addEventListener("resize", this.resetWhenRes);
   },
   components: {
     LTRProduct
@@ -98,7 +104,7 @@ export default {
   align-items: center;
 }
 .icon {
-  border: thin solid black;
+  border: thin solid #dddddd;
   padding: 1rem 1rem;
   cursor: pointer;
   color: #4caf50;
