@@ -5,6 +5,7 @@
       v-bind:listFeaturedProductsTitle="listFeaturedProductsTitle"
       v-bind:listFeaturedProducts="productsChoosen"
       v-on:getDataFromFPTitle="getDataFromFPTitle"
+      v-on:getDataFromFPP="getDataFromFPP"
       v-bind:sumOfNumberProductsInPage="sumOfNumberProductsInPage"
       class="mt-5"
     />
@@ -12,6 +13,7 @@
     <homeCompLTRProducts v-bind:LTRListProducts="LTRListProducts" />
     <homeCompBlog v-bind:listBlog="listBlog" />
     <homeCompFooter/>
+    <homeCompCart  v-bind:numberIntoCart="numberIntoCart"/>
   </div>
 </template>
 
@@ -23,6 +25,7 @@ import homeCompOtherProducts from "./homeCompOtherProducts";
 import homeCompLTRProducts from "./homeCompLTRProducts";
 import homeCompBlog from "./homeCompBlog";
 import homeCompFooter from './homeCompFooter'
+import homeCompCart from './homeCompCart'
 export default {
   name: "home",
   data() {
@@ -394,13 +397,19 @@ export default {
         }
       ],
       dataFromFPTitle: "",
-      sumOfNumberProductsInPage: 0
+      sumOfNumberProductsInPage: 0,
+      numberIntoCart: 0
     };
   },
   methods: {
     //recieve data from homeCompFeaturedProducts
     getDataFromFPTitle: function(data) {
       this.dataFromFPTitle = data;
+    },
+    getDataFromFPP: function(data) {
+      --this.listFeaturedProducts[data.id].stock;
+      window.alert(`add to cart success!`);
+      this.numberIntoCart++;
     }
   },
   computed: {
@@ -422,7 +431,8 @@ export default {
     homeCompOtherProducts,
     homeCompLTRProducts,
     homeCompBlog,
-    homeCompFooter
+    homeCompFooter,
+    homeCompCart
   }
 };
 </script>

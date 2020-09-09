@@ -31,7 +31,7 @@
             <a href="#">Testimionals</a>
           </div>
         </div>
-        <div class="col-lg-4 email mt-3">
+        <div class="col-lg-4 email mt-5">
           <h2 style="font-weight: bold; margin-bottom: 2rem;">
             Join our Newsletter Now
           </h2>

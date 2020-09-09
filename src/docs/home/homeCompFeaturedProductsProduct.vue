@@ -14,14 +14,23 @@
           adipisicing elit. Nobis, officia!
         </h5>
         <h5>
-          <b>- Stock: {{ product.stock }} </b>available
+          <b>- Stock: </b>
+          <span v-if="this.product.stock != 0">
+           <b> {{ product.stock }}</b> available</span
+          >
+          <span v-else style="font-weight: bold; color: red"> Out Of Stock </span>
         </h5>
         <h3>
           <b>Price: &#65129;{{ product.price }} </b>
         </h3>
       </div>
-      <button class="btn btn-success" style="width: 100%; font-size: 1.5rem">
-        Add to Cart
+      <button
+        class="btn btn-success"
+        style="width: 100%; font-size: 1.5rem"
+        @click="sendDataToHomeFP"
+        v-bind:disabled="this.product.stock === 0"
+      >
+        <div>Add to Cart</div>
       </button>
     </div>
   </div>
@@ -32,6 +41,15 @@ export default {
   name: "homeCompFeaturedProductsProduct",
   data() {
     return {};
+  },
+  methods: {
+    sendDataToHomeFP: function() {
+      let data = {
+        product: this.product
+      };
+      console.log(this.product.stock);
+      this.$emit("getDataFromFPP", data.product);
+    }
   },
   props: {
     product: {
@@ -50,12 +68,10 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.product:hover {
- 
-}
+
 .product-img {
   padding: 0 3rem;
-  height: 55%;
+  height: 50%;
   width: 100%;
 }
 .product-desc {
@@ -68,15 +84,11 @@ export default {
   padding: 1rem;
   margin: 0 -1rem;
   background-color: #f5f5f5;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   transition: 0.3s;
-
-
 }
 .product-border:hover {
- transform: scale(1.1);
   z-index: 999;
   border: 1px solid black;
-
 }
 </style>

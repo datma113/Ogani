@@ -47,7 +47,7 @@ export default {
 }
 .header-icon {
   font-size: 1.5rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 50%;
 }
 .header-icon:hover {

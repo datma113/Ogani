@@ -32,6 +32,7 @@
           v-for="product in listFeaturedProducts"
           v-bind:key="product.id"
           v-bind:product="product"
+          v-on:getDataFromFPP="getDataFromFPP"
         />
       </div>
     </div>
@@ -134,10 +135,13 @@ export default {
       let data = this.listFeaturedProductsTitle[index].type;
       this.$emit("getDataFromFPTitle", data);
     },
-    resetWhenRes() {
+    resetWhenRes: function() {
       let heightOfPFContainer = document.getElementById("homeFPContainer");
       heightOfPFContainer.style.transform = `translateY(0)`;
         this.indexCurrentPage = 1;
+    },
+    getDataFromFPP: function(data) {
+      this.$emit('getDataFromFPP',data);
     }
   },
   computed: {
