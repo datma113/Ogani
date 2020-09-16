@@ -6,6 +6,7 @@
       <compSearchBar></compSearchBar>
     </div>
     <router-view ></router-view>
+    <compFooter/>
   </div>
 </template>
 
@@ -13,6 +14,7 @@
 import compHeader from "./components/compHeader";
 import compNav from "./components/compNav";
 import compSearchBar from "./components/compSearchBar";
+import compFooter from './components/compFooter';
 
 export default {
   name: "app",
@@ -22,7 +24,8 @@ export default {
   components: {
     compHeader,
     compNav,
-    compSearchBar
+    compSearchBar,
+    compFooter
   }
 };
 </script>

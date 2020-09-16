@@ -4,7 +4,7 @@
     <div class="container" style=" border-bottom: thin solid #DDDDDD;">
       <div class="row pb-5 pt-5">
         <div class="col-lg-4">
-          <img src="../../assets/img/logo_ogani.png" />
+          <img src="../assets/img/logo_ogani.png" />
           <div class="mt-5">
             <h2>Address: Ward 5, distict Go Vap, HCMC</h2>
             <h2>Phone: +84 912 366 093</h2>
@@ -63,7 +63,7 @@
                 My webside base on template of colorlib
             </div>
             <div class="col-12 col-md-5 " style="display: flex; justify-content: center;">
-                <img src="../../assets/img/paypal.png" alt="">
+                <img src="../assets/img/paypal.png" alt="">
             </div>
         </div>
     </div>

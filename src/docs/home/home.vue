@@ -12,7 +12,6 @@
     <homeCompOtherProducts v-bind:listOtherProducts="listOtherProducts" />
     <homeCompLTRProducts v-bind:LTRListProducts="LTRListProducts" />
     <homeCompBlog v-bind:listBlog="listBlog" />
-    <homeCompFooter/>
     <homeCompCart  v-bind:numberIntoCart="numberIntoCart"/>
   </div>
 </template>
@@ -24,7 +23,6 @@ import homeCompFeaturedProductsProduct from "./homeCompFeaturedProductsProduct";
 import homeCompOtherProducts from "./homeCompOtherProducts";
 import homeCompLTRProducts from "./homeCompLTRProducts";
 import homeCompBlog from "./homeCompBlog";
-import homeCompFooter from './homeCompFooter'
 import homeCompCart from './homeCompCart'
 export default {
   name: "home",
@@ -431,7 +429,6 @@ export default {
     homeCompOtherProducts,
     homeCompLTRProducts,
     homeCompBlog,
-    homeCompFooter,
     homeCompCart
   }
 };
