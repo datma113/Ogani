@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-      <p style="font-weight:bold; color: white"> Ogani - Shop </p>
+      <p style="font-weight:bold; color: white"> Ogani - Pages - Shop Details </p>
   </div>
 </template>
 

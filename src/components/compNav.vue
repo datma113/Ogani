@@ -11,8 +11,22 @@
         <li class="nav-item p-xl-4 p-lg-3 ">
           <router-link class="nav-link" href="#" to="/shop">Shops</router-link>
         </li>
-        <li class="nav-item p-xl-4 p-lg-3 ">
+        <li class="nav-item p-xl-4 p-lg-3 has-sub">
           <a class="nav-link" href="#">Pages</a>
+          <ul class="nav flex-column sub-page">
+            <li class="nav-item">
+              <router-link href="#" class="nav-link sub-a" to="/pages-shop-details"> Shop Details</router-link>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link sub-a"> Shopping Cart</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link sub-a"> Checkout</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link sub-a"> Blog Details</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item p-xl-4 p-lg-3 ">
           <a class="nav-link" href="#">Blog</a>
@@ -86,7 +100,7 @@
           ></span>
         </div>
         <div class="mt-5 flex side-bar-res-email">
-             <i class="fas fa-envelope"></i>&nbsp; datma113112111@gmail.com
+          <i class="fas fa-envelope"></i>&nbsp; datma113112111@gmail.com
         </div>
       </div>
     </div>
@@ -216,7 +230,7 @@ export default {
 }
 .side-bar-res-each-icon:hover {
   background-color: #4caf54;
-  color: white ;
+  color: white;
 }
 .side-bar-res-email {
   display: flex;
@@ -225,6 +239,23 @@ export default {
   cursor: pointer;
 }
 .side-bar-res-email:hover {
-  color: #4caf50 ;
+  color: #4caf50;
+}
+.sub-page {
+  position: absolute;
+  background-color: #4caf54;
+  z-index: 9999;
+  width: 20rem;
+  display: none;
+}
+.sub-a {
+  color: white;
+}
+.sub-a:hover {
+  color: black;
+  text-shadow: 0 0 10px white;
+}
+.has-sub:hover .sub-page {
+  display: block;
 }
 </style>

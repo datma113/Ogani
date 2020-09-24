@@ -5,8 +5,8 @@
         Sort By
         <select name="" id="select" class="op" @change="change">
           <option value="none">none</option>
-          <option value="insc">Inscent</option>
-          <option value="desc">Descent</option>
+          <option value="insc">Ascending</option>
+          <option value="desc">Descending</option>
         </select>
       </div>
       <div class="col-lg-4 op-container num-pro"> <b style="color: black"> {{ lengthOfProducts }}</b>&nbsp; products found </div>
