@@ -76,7 +76,7 @@
 
 <script>
 export default {
-  name: "details",
+  name: 'detailsProducts',
   data() {
     return {
         number: 0
