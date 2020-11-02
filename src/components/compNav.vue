@@ -21,7 +21,7 @@
               <router-link href="#" class="nav-link sub-a" to="/pages-shopping-cart"> Shopping Cart</router-link>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link sub-a"> Checkout</a>
+              <router-link href="#" class="nav-link sub-a" to="/pages-check-out"> Shopping Cart</router-link>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link sub-a"> Blog Details</a>
