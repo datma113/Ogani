@@ -29,7 +29,7 @@
           </ul>
         </li>
         <li class="nav-item p-xl-4 p-lg-3 ">
-          <a class="nav-link" href="#">Blog</a>
+              <router-link class="nav-link" href="#" to="/blogs">Blogs</router-link>
         </li>
         <li class="nav-item p-xl-4 p-lg-3 ">
           <a class="nav-link" href="#">Contact</a>

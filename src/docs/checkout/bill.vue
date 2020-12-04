@@ -145,7 +145,7 @@
               Subtotal
             </div>
             <div class="col-4 pr" style="font-weight: bold; font-size: 2rem">
-              777.777$
+              $777.777
             </div>
           </div>
           <hr />
@@ -154,7 +154,7 @@
               Subtotal
             </div>
             <div class="col-4 pr" style="font-weight: bold; font-size: 2rem">
-              777.777$
+              $777.777
             </div>
           </div>
           <div class="custom-control custom-checkbox cbx">

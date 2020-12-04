@@ -417,7 +417,6 @@ export default {
         x.type.match(this.dataFromFPTitle)
       ).length;
       this.sumOfNumberProductsInPage = Math.ceil(data / 8);
-      console.log(this.sumOfNumberProductsInPage);
       return this.listFeaturedProducts.filter(x =>
         x.type.match(this.dataFromFPTitle)
       );
