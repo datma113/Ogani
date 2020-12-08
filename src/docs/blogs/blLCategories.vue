@@ -49,6 +49,7 @@ export default {
     display: flex;
     color: gray;
     flex-direction: column;
+    font-size: 2rem;
 }
 .list {
     cursor: pointer;

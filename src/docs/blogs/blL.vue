@@ -2,12 +2,16 @@
   <div class="layout">
       <blLSearchBar/>
       <blLCtegories class="blLCategories" v-bind:classify="classify"/>
+      <blLNews v-bind:recentNews="recentNews"/>
+      <btLSearhBy v-bind:keywordSearchBy="keywordSearchBy"/>
   </div>
 </template>
 
 <script>
 import blLSearchBar from './blLSearchBar'
 import blLCtegories from './blLCategories'
+import blLNews from './blLNews'
+import btLSearhBy from './blLSearchBy'
 export default {
     name: 'blogsLeft',
     data() {
@@ -17,14 +21,24 @@ export default {
     },
     components: {
         blLSearchBar,
-        blLCtegories
+        blLCtegories,
+        blLNews,
+        btLSearhBy
     },
     props: {
         classify: {
             type: Array,
             default: []
+        },
+        recentNews: {
+            type: Array,
+            default: []
+        },
+        keywordSearchBy: {
+            type: Array,
+            default: []
         }
-    }
+    },
 }
 </script>
 
