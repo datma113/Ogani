@@ -7,7 +7,7 @@
           <img src="../assets/img/logo_ogani.png" />
           <div class="mt-5">
             <h2>Address: Ward 5, distict Go Vap, HCMC</h2>
-            <h2>Phone: +84 912 366 093</h2>
+            <h2>Phone: +88 888 888 888</h2>
             <h2>Email: datma113112111@gmail.com</h2>
           </div>
         </div>
