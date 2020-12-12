@@ -5,7 +5,11 @@
         class="col-lg-6"
       />
        <hr>
-       <blRPaginations v-on:CurrentPageFromblRPaginations="CurrentPageFromblRPaginations" />
+       <blRPaginations v-on:CurrentPageFromblRPaginations="CurrentPageFromblRPaginations"
+        v-bind:numberPage="numberPage"
+        v-on:getDecreaseNumberFromblRPaginations="getDecreaseNumberFromblRPaginations"
+         v-on:getIncreaseNumberFromblRPaginations="getIncreaseNumberFromblRPaginations"
+        />
   </div>
 </template>
 
@@ -21,13 +25,24 @@ export default {
         blogs: {
             type: Array,
             default: []
+        },
+        numberPage: {
+            type: Number,
+            default: 0
         }
     },
     methods: {
         CurrentPageFromblRPaginations: function(data) {
             this.$emit('CurrentPageFromblogsRight',data);
+        },
+        getIncreaseNumberFromblRPaginations: function(data) {
+             this.$emit("getIncreaseNumberFromblRPaginations", data);
+        },
+        getDecreaseNumberFromblRPaginations: function(data) {
+              this.$emit("getDecreaseNumberFromblRPaginations", data);
         }
     }
+    
 }
 </script>
 
