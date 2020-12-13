@@ -4,9 +4,9 @@
       <div class="categories">
           <div v-for="(obj, index) in classify" v-bind:key="obj.id"  
             class="m-3 list"
-            @click="updateCurrentIndex(index)"
+            @click="updateCurrentIndex(index), getTitle(obj.title)"
             v-bind:class="{ 'activedCategories' : checkActived(index) }"
-          >{{obj.title}} ({{obj.numberCount}}) </div>
+          >{{obj.title}}  </div>
       </div>
   
   </div>
@@ -32,6 +32,9 @@ export default {
         },
         updateCurrentIndex(index) {
             this.currentIndex = index;
+        },
+        getTitle: function(title) {
+            this.$emit('getTitleFromblrCategories', title);
         }
     }
 }

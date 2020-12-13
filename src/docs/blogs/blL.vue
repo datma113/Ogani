@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
-      <blLSearchBar/>
-      <blLCtegories class="blLCategories" v-bind:classify="classify"/>
+      <blLSearchBar v-on:getTextSearchFromblLSearchBar="getTextSearchFromblLSearchBar"/>
+      <blLCtegories class="blLCategories" v-bind:classify="classify" v-on:getTitleFromblrCategories="getTitleFromblrCategories"/>
       <blLNews v-bind:recentNews="recentNews"/>
       <btLSearhBy v-bind:keywordSearchBy="keywordSearchBy"/>
   </div>
@@ -39,6 +39,15 @@ export default {
             default: []
         }
     },
+    methods: {
+        getTitleFromblrCategories: function(data) {
+            this.$emit('getTitleFromblrCategories', data);
+        },
+        getTextSearchFromblLSearchBar:function(data) {
+             this.$emit('getTextSearchFromblLSearchBar', data);
+        }
+    },
+
 }
 </script>
 

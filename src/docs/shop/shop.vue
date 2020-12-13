@@ -297,7 +297,6 @@ export default {
     let text = data.replace(/\s/g, '').toUpperCase();
     this.listProductsSearched = this.shopProducts.filter( x => x.name.replace(/\s/g, '').toUpperCase().match(text) );
     this.lengthOfProducts = this.listProductsSearched.length;
-      console.log(this.lengthOfProducts);
     },
     getSortingValue: function(data) {
       if( data === 'insc' ) {

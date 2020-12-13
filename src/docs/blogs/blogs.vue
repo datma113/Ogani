@@ -8,12 +8,14 @@
           v-bind:classify="classify"
           v-bind:recentNews="recentNews"
           v-bind:keywordSearchBy="keywordSearchBy"
+          v-on:getTitleFromblrCategories="getTitleFromblrCategories"
+          v-on:getTextSearchFromblLSearchBar="getTextSearchFromblLSearchBar"
         />
         <blogsRight
           class="col-lg-8"
-          v-bind:blogs="dividePaginations"
           v-on:CurrentPageFromblogsRight="CurrentPageFromblogsRight"
           v-bind:numberPage="numberPage"
+          v-bind:blogs="conditionItem"
           v-on:getDecreaseNumberFromblRPaginations="
             getDecreaseNumberFromblRPaginations
           "
@@ -22,6 +24,9 @@
           "
         />
       </div>
+      {{ filterListByCategories }}
+      {{ dividePaginations }}
+      {{ getListByTextSearch }}
     </div>
   </div>
 </template>
@@ -35,12 +40,12 @@ export default {
   data() {
     return {
       classify: [
-        { id: 0, title: "all", numberCount: 0 },
-        { id: 1, title: "Beauti", numberCount: 0 },
-        { id: 2, title: "Food", numberCount: 0 },
-        { id: 3, title: "Life Style", numberCount: 0 },
-        { id: 4, title: "Travel", numberCount: 0 },
-        { id: 5, title: "Other..", numberCount: 0 }
+        { id: 0, title: "all" },
+        { id: 1, title: "Beauti" },
+        { id: 2, title: "Food" },
+        { id: 3, title: "Life Style" },
+        { id: 4, title: "Travel" },
+        { id: 5, title: "Other" }
       ],
 
       recentNews: [
@@ -82,7 +87,8 @@ export default {
           cmt: 22,
           title: "6 ways to prepare breakfast for 30",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "beauti"
         },
         {
           id: 1,
@@ -91,7 +97,8 @@ export default {
           cmt: 23,
           title: "Visit the clean farm in the US",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "food"
         },
         {
           id: 2,
@@ -100,7 +107,8 @@ export default {
           cmt: 12,
           title: "Cooking tips make cooking simple",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "lifeStyle"
         },
         {
           id: 3,
@@ -109,7 +117,8 @@ export default {
           cmt: 6,
           title: "And we're brewing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "travel"
         },
         {
           id: 4,
@@ -118,7 +127,8 @@ export default {
           cmt: 3,
           title: "Non-breaking space characters ",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "other"
         },
         {
           id: 5,
@@ -127,7 +137,8 @@ export default {
           cmt: 66,
           title: "long-arrow-alt-right",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "other"
         },
         {
           id: 6,
@@ -136,7 +147,8 @@ export default {
           cmt: 17,
           title: "Non-collapsing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "food"
         },
         {
           id: 7,
@@ -145,7 +157,8 @@ export default {
           cmt: 623,
           title: "Uses and variations",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "travel"
         },
         {
           id: 8,
@@ -154,7 +167,8 @@ export default {
           cmt: 623,
           title: "Uses and variations",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "food"
         },
         {
           id: 9,
@@ -163,7 +177,8 @@ export default {
           cmt: 17,
           title: "Non-collapsing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "beauti"
         },
         {
           id: 10,
@@ -172,7 +187,8 @@ export default {
           cmt: 6,
           title: "And we're brewing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "lifeStyle"
         },
         {
           id: 11,
@@ -181,7 +197,8 @@ export default {
           cmt: 623,
           title: "Uses and variations",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "other"
         },
         {
           id: 12,
@@ -190,7 +207,8 @@ export default {
           cmt: 17,
           title: "Non-collapsing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "travel"
         },
         {
           id: 13,
@@ -199,7 +217,8 @@ export default {
           cmt: 623,
           title: "Uses and variations",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "beauti"
         },
         {
           id: 14,
@@ -208,7 +227,8 @@ export default {
           cmt: 623,
           title: "Uses and variations",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "travel"
         },
         {
           id: 15,
@@ -217,7 +237,8 @@ export default {
           cmt: 6,
           title: "And we're brewing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "beauti"
         },
         {
           id: 16,
@@ -226,7 +247,8 @@ export default {
           cmt: 623,
           title: "Uses and variations",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "beauti"
         },
         {
           id: 17,
@@ -235,7 +257,8 @@ export default {
           cmt: 623,
           title: "Uses and variations",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "food"
         },
         {
           id: 18,
@@ -244,7 +267,8 @@ export default {
           cmt: 6,
           title: "And we're brewing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "beauti"
         },
         {
           id: 19,
@@ -253,11 +277,16 @@ export default {
           cmt: 17,
           title: "Non-collapsing",
           desc:
-            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!"
+            "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quas similique, ducimus doloremque vero ex!",
+          type: "other"
         }
       ],
       currentPagePagination: 0,
-      numberPage: 3
+      numberPage: 0,
+      conditionItem: [],
+      classifyCategories: "all",
+      textSearch: '',
+      resetTextSearch: ''
     };
   },
   components: {
@@ -272,22 +301,88 @@ export default {
     /**
      * get increase and decrease number from blRPaginations
      * change current page
-     * 
+     *
      */
     getIncreaseNumberFromblRPaginations: function(data) {
       this.currentPagePagination = data;
     },
     getDecreaseNumberFromblRPaginations: function(data) {
       this.currentPagePagination = data;
-    }
+    },
+    /**
+     * get title from blLCategories to compare and filter list
+     */
+    getTitleFromblrCategories: function(data) {
+      this.classifyCategories = data;
+    },
+      getTextSearchFromblLSearchBar:function(data) {
+          this.textSearch = data;
+          
+        }
   },
   computed: {
     dividePaginations: function() {
+      /***
+       *  divide 8 page
+       */
       const SIZE_PAGE = 8;
-      return this.blogs.slice(
-        this.currentPagePagination * SIZE_PAGE,
-        this.currentPagePagination * SIZE_PAGE + SIZE_PAGE
-      );
+      /**
+       * initiate blog's values
+       */
+
+      if (this.classifyCategories.toLowerCase() === "all") {
+        /**
+         * get number of divide page (8) of blogs
+         */
+        this.numberPage = Math.ceil(this.blogs.length / SIZE_PAGE);
+        /**
+         * update conditionItem list
+         */
+        this.conditionItem = this.blogs.slice(
+          this.currentPagePagination * SIZE_PAGE,
+          this.currentPagePagination * SIZE_PAGE + SIZE_PAGE
+        );
+      } else {
+        /**
+         * reset currentPagination
+         */
+        this.currentPagePagination = 0;
+        /**
+         * get number of divide page (8) of condition items
+         */
+        this.numberPage = Math.ceil(this.conditionItem.length / SIZE_PAGE);
+        /**
+         * update conditionItem list
+         */
+        this.conditionItem = this.conditionItem.slice(
+          this.currentPagePagination * SIZE_PAGE,
+          this.currentPagePagination * SIZE_PAGE + SIZE_PAGE
+        );
+      }
+    },
+    filterListByCategories: function() {      
+      /**
+       * compare 2 String classifyCategories and blogs.type
+       * to get a condition list if it not a 'all' String
+       */
+      if (this.classifyCategories.toLowerCase() != "all") {
+        
+        this.conditionItem = this.blogs.filter(
+          x =>
+            x.type.replace(" ", "").toLowerCase() ===
+            this.classifyCategories.replace(" ", "").toLowerCase()
+        );
+      } else this.conditionItem = this.blogs;
+    },
+    getListByTextSearch: function() {
+      let stringCompare = this.textSearch.replace(/\s/g,'').toLowerCase();
+      let temp = this.blogs.filter( x => x.title.replace(/\s/g,'').toLowerCase().match(stringCompare) );
+      if( temp.length !=0 ) {
+          this.conditionItem = temp;
+      }
+      
+      else
+        this.conditionItem = [];
     }
   }
 };
