@@ -1,16 +1,16 @@
 <template>
   <div class="row" style="border-bottom: 1px solid #dddddd">
-    <div class="col-5  name">
+    <div class="col-5 name row">
       <img
         v-bind:src="require(`../../assets/img/${product.url}`)"
         class="img"
       />
-      {{ product.name }}
+      <div>{{ product.name }}</div>
     </div>
-    <div class="col-2   alg" style="font-weight: bold">
+    <div class="col-2  col-md-2 alg" style="font-weight: bold">
       ${{ product.price }}
     </div>
-    <div class="col-2  alg quanlity ">
+    <div class="col-3  col-md-2 alg quanlity ">
       <div class="q icon" @click="decreaseQuanlity()">
         <i class="fas fa-minus" style="font-size: 1rem"></i>
       </div>
@@ -19,10 +19,10 @@
         <i class="fas fa-plus"  style="font-size: 1rem"></i>
       </div>
     </div>
-    <div class="col-2 alg" style="font-weight: bold">
+    <div class="col-1  col-md-2 alg" style="font-weight: bold">
       ${{ product.price * product.quanlity }}
     </div>
-    <div class="col-1 alg " @click="removeProduct()">
+    <div class="col-1  col-md-1 alg " @click="removeProduct()">
       <i class="fas fa-times close"></i>
     </div>
   </div>
@@ -68,6 +68,8 @@ export default {
 }
 .name {
   font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
 }
 .alg {
   display: flex;

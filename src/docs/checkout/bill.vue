@@ -91,7 +91,7 @@
             >Ship to a different address?</label
           >
         </div>
-        <div class="row">
+        <div class="row mb-5">
           <div class="col-lg-12 left">
             <div class="lbl">
               Other Notes: <span style="color: red">(*)</span>

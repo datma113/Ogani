@@ -21,7 +21,7 @@
               <router-link href="#" class="nav-link sub-a" to="/pages-shopping-cart"> Shopping Cart</router-link>
             </li>
             <li class="nav-item">
-              <router-link href="#" class="nav-link sub-a" to="/pages-check-out"> Shopping Cart</router-link>
+              <router-link href="#" class="nav-link sub-a" to="/pages-check-out"> Checkout</router-link>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link sub-a"> Blog Details</a>
@@ -70,16 +70,27 @@
         </div>
         <ul class="nav flex-column ">
           <li class="nav-item p-xl-4 p-lg-3 side-bar-res-nav ">
-            <a class="nav-link" href="#">Home</a>
+            <router-link class="nav-link" href="#" to="/">Home</router-link>
           </li>
           <li class="nav-item p-xl-4 p-lg-3 side-bar-res-nav ">
-            <a class="nav-link" href="#">Shops</a>
+            <router-link class="nav-link" href="#" to="/shop">Shops</router-link>
+          </li>
+          <li class="nav-item p-xl-4 p-lg-3 side-bar-res-nav flex-column">
+            <a class="nav-link" href="#"  @click="pageActived()">Pages</a>
+              <ul class="nav flex-column inside-shop-container" v-if="pageActivedStatus">
+                      <li class="nav-item p-xl-4 p-lg-3  ">
+                          <router-link href="#" class="nav-link" to="/pages-shop-details"> Shop Details</router-link>
+                      </li>
+                      <li class="nav-item p-xl-4 p-lg-3  ">
+                        <router-link href="#" class="nav-link" to="/pages-shopping-cart"> Shopping Cart</router-link>
+                      </li>
+                      <li class="nav-item p-xl-4 p-lg-3  ">
+                        <router-link href="#" class="nav-link" to="/pages-check-out"> Checkout</router-link>
+                      </li>
+              </ul>
           </li>
           <li class="nav-item p-xl-4 p-lg-3 side-bar-res-nav ">
-            <a class="nav-link" href="#">Pages</a>
-          </li>
-          <li class="nav-item p-xl-4 p-lg-3 side-bar-res-nav ">
-            <a class="nav-link" href="#">Blog</a>
+            <router-link class="nav-link" href="#" to="/blogs">Blogs</router-link>
           </li>
           <li class="nav-item p-xl-4 p-lg-3 side-bar-res-nav ">
             <a class="nav-link" href="#">Contact</a>
@@ -112,7 +123,8 @@ export default {
   name: "compNav",
   data() {
     return {
-      sideBarActive: false
+      sideBarActive: false,
+      pageActivedStatus: false
     };
   },
   methods: {
@@ -120,13 +132,14 @@ export default {
       let sideBarRes = document.getElementById("sideBarRes");
       if (!this.sideBarActive) {
         sideBarRes.style.marginLeft = "0";
-        this.sideBarActive = !this.sideBarActive;
-        document.body.style.backgroundColor = "#DDDDDD";
+        this.sideBarActive = !this.sideBarActive;    
       } else {
         sideBarRes.style.marginLeft = "-25rem";
         this.sideBarActive = !this.sideBarActive;
-        document.body.style.backgroundColor = "white";
       }
+    },
+    pageActived: function() {
+      this.pageActivedStatus = !this.pageActivedStatus;
     }
   },
   computed: {}
@@ -258,4 +271,11 @@ export default {
 .has-sub:hover .sub-page {
   display: block;
 }
+
+.inside-shop-container {
+  font-size: 1.5rem;
+  margin-left: 8rem;
+  border-bottom: none;
+}
+
 </style>

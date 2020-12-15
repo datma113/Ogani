@@ -2,7 +2,7 @@
   <div>
     <span><p  class="title">Sale Off</p></span>
     <div class="row mt-5">
-        <saleOffProduct class="col-lg-3" v-for="product in saleOffProducts" v-bind:key="product.id" v-bind:product="product"/>
+        <saleOffProduct class="col-md-6 col-lg-3" v-for="product in saleOffProducts" v-bind:key="product.id" v-bind:product="product"/>
     </div>
   </div>
 </template>

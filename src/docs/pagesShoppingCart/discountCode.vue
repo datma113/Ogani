@@ -3,12 +3,12 @@
     <p class="title">
       Discount Codes
     </p>
-    <div class="row">
-      <div class="col-6">
+    <div class="row mb-5">
+      <div class="col-xl-6 col-lg-12">
         <input type="text" class="form-control in" />
       </div>
 
-      <button class="btn btn-secondary app col-4">APPLY COUPON</button>
+       <div class="col-xl-4 col-lg-12 mt-2 mt-xl-0"> <button class="btn btn-secondary app ">APPLY COUNPON</button></div> 
     </div>
   </div>
 </template>

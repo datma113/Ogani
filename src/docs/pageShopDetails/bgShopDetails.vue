@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-      <p style="font-weight:bold; color: white"> Ogani - Pages - Shop Details </p>
+     Ogani - Pages - Shop Details 
   </div>
 </template>
 
@@ -20,5 +20,8 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 4rem;
+    text-align: center;
+    font-weight: bold;
+    color: white;
 }
 </style>

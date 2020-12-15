@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-4 op-container">
-        Sort By
-        <select name="" id="select" class="op" @change="change">
+      <div class="col-md-4 col-lg-4 op-container row">
+        <div class=" col-lg-4">Sort by</div>
+        <select name="" id="select" class="op col-sm-12 col-md-6" @change="change">
           <option value="none">none</option>
           <option value="insc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
       </div>
-      <div class="col-lg-4 op-container num-pro"> <b style="color: black"> {{ lengthOfProducts }}</b>&nbsp; products found </div>
-      <div class="col-lg-4  op-container" style="justify-content: flex-end">
+      <div class="col-md-6 col-lg-4 op-container num-pro"> <b style="color: black"> {{ lengthOfProducts }}</b>&nbsp; products found </div>
+      <div class="col-md-2 col-lg-4  op-container" style="justify-content: flex-end">
         <span class="icon" @click="checkSearhStatus">
           <i class="fas fa-search"></i>
         </span>

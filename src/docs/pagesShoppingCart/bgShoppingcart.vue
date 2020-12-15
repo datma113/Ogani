@@ -17,6 +17,7 @@ export default {
     height: 13rem;
     width: 100%;
     display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
     font-size: 4rem;

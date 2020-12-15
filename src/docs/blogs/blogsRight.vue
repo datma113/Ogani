@@ -2,7 +2,7 @@
   <div class="row">
       <blRElement v-for="(blog, index) in blogs" v-bind:key="index"
         v-bind:blog="blog"
-        class="col-lg-6"
+        class="col-md-6"
       />
        <hr>
        <blRPaginations v-on:CurrentPageFromblRPaginations="CurrentPageFromblRPaginations"

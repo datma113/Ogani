@@ -13,7 +13,7 @@
        <div class="mt-3 desc">
           {{blog.desc}}
       </div>
-      <div class="read-more col-lg-6">
+      <div class="read-more col-11 col-lg-6">
           Read more &nbsp;
           <i class="fas fa-long-arrow-alt-right"></i>
       </div>

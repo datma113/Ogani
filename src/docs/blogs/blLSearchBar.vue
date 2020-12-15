@@ -1,6 +1,6 @@
 <template>
-  <div class="search-container">
-      <input type="text" placeholder="Search here" class="tf-search" v-model="textSearch" v-on:keyup="getTextSearch(textSearch)"> 
+  <div class="search-container row">
+      <input type="text" placeholder="Search here" class="tf-search col-lg-12" v-model="textSearch" v-on:keyup="getTextSearch(textSearch)"> 
       <div class="btn-search"> <i class="fas fa-search"></i> </div>
      
   </div>

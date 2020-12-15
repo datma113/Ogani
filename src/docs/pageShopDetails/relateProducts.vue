@@ -3,7 +3,7 @@
     <div class="title-container"><p class="title">Related products</p></div>
     <div class="row mt-5">
       <relateProductsProduct
-        class="col-lg-3"
+        class="col-sm-6 col-lg-3"
         v-for="product in listRelateProducts"
         v-bind:key="product.id"
         v-bind:product="product"

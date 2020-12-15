@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="dir-container ">
+    <div class="dir-container row">
       <div
         v-for="(item, index) in dir"
         v-bind:key="item.id"
