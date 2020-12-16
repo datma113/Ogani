@@ -11,7 +11,7 @@
           v-for="products in listAllProductsType"
           v-bind:key="products.id"
           v-bind:products="products"
-          class="col-6 col-md-4 col-lg-3 "
+          class="col-6 col-md-4 col-lg-3 edit-margin"
           v-bind:id="`imgCarousel${products.id}`"
         >
         </homeCompProductsType>
@@ -19,15 +19,18 @@
       </div>
       <button
         class="arrow arrow-right"
-        v-bind:disabled="checkActiveCarouselNext"
-        @click="nextSlideProductsType()"
+        v-bind:disabled="checkDisabledNextBtnMethod()"
+        @click="nextSlideProductsType(),
+         increaseIndexOfCarousel()   
+        "
       >
         <i class="fas fa-caret-right fa-3x"></i>
       </button>
       <button
         class="arrow arrow-left"
-        v-bind:disabled="checkActiveCarouselPre"
-        @click="preSlideProductsType()"
+        v-bind:disabled="checkDisabledPreBtnMethod()"
+        @click="preSlideProductsType(),
+        decreaseIndexOfCarousel()"
       >
         <i class="fas fa-caret-left fa-3x"></i>
       </button>
@@ -41,9 +44,15 @@ export default {
   name: "homeCompAllProducts",
   data() {
     return {
-      carouselCounting: 0,
-      checkActiveCarouselNext: false,
-      checkActiveCarouselPre: true
+      /**
+       * index when responsive of carousel
+       */
+      indexOfImageLg: 0,
+      indexOfImageMd: 0,
+      indexOfImageSm: 0,
+      /**
+       * check disabled status of carousel
+       */
     };
   },
   components: {
@@ -51,52 +60,89 @@ export default {
   },
   methods: {
     nextSlideProductsType: function() {
-      this.checkActiveCarouselPre = false;
-      //get element of img and img container
-      let widthOfEachImg = document.getElementById("imgCarousel0");
-      let allProductsCarousel = document.getElementById("allProductsCarousel");
-      // DOM transger
-      allProductsCarousel.style.transform += `translateX(${-widthOfEachImg.clientWidth}px)`;
-      //limit transfer
-      if (this.carouselCounting === this.listAllProductsType.length - 5)
-        this.checkActiveCarouselNext = true;
-      this.carouselCounting++;
+      /**
+       * get container element
+       */
+      let carousel = document.getElementById("allProductsCarousel");
+      /**
+       * get width of each image
+       */
+      let widthOfElement = document.getElementById("imgCarousel0").offsetWidth ;
+       /**
+       * implement transform
+       * must -10px when transform cause class edit-margin
+       */
+       carousel.style.transform += `translateX(${-widthOfElement-10}px)`;
+     
     },
-
     preSlideProductsType: function() {
-      this.checkActiveCarouselNext = false;
-      //get element of img and img container
-      let widthOfEachImg = document.getElementById("imgCarousel0");
-      let allProductsCarousel = document.getElementById("allProductsCarousel");
-      // DOM transger
-      allProductsCarousel.style.transform += `translateX(${widthOfEachImg.clientWidth}px)`;
-      //limit transfer
-      this.carouselCounting--;
-      if (this.carouselCounting === 0) this.checkActiveCarouselPre = true;
+       /**
+       * get container element
+       */
+      let carousel = document.getElementById("allProductsCarousel");
+      /**
+       * get width of each image
+       */
+        let widthOfElement = document.getElementById("imgCarousel0").offsetWidth ;
+      /**
+       * implement transform
+       * must +10px when transform cause class edit-margin
+       */
+       carousel.style.transform += `translateX(${widthOfElement+10}px)`;
     },
-
-    // runCarousel: function() {
-    //   setInterval(() => {
-    //     this.nextSlideProductsType();
-    //   }, 2000);            bug
-    // }
-
     resetCarouselWhenResponsive: function() {
-      //get element of img and img container
-      let widthOfEachImg = document.getElementById("imgCarousel0");
-      let allProductsCarousel = document.getElementById("allProductsCarousel");
-      // reset transform when responsive
-      allProductsCarousel.style.transform = `translateX(0)`;
-      // reset all
-      this.checkActiveCarouselNext = false;
-      this.checkActiveCarouselPre = true;
-      this.carouselCounting = 0;
+       /**
+       * get container element
+       */
+      let carousel = document.getElementById("allProductsCarousel");
+      carousel.style.transform = `translateX(0)`;
+      this.indexOfImageLg = 0;
+      this.indexOfImageSm = 0;
+      this.indexOfImageMd = 0;
+    },
+    increaseIndexOfCarousel: function() {
+      let windowWidth = window.innerWidth;
+      /**
+       * increase index of image of carousel
+       */
+      if( windowWidth >= 992 ) {
+        this.indexOfImageLg++;
+      } else if( windowWidth >= 768 ) {
+        this.indexOfImageMd++;
+      } else {
+        this.indexOfImageSm++;
+      }
+    },
+    decreaseIndexOfCarousel: function() {
+      let windowWidth = window.innerWidth;
+      /**
+       * decrease index of image of carousel
+       */
+      if( windowWidth >= 992 ) {
+        this.indexOfImageLg--;
+      } else if( windowWidth >= 768 ) {
+        this.indexOfImageMd--;
+      } else {
+        this.indexOfImageSm--;
+      }
+    },
+    checkDisabledNextBtnMethod: function() {
+      return (this.indexOfImageLg === 3 || this.indexOfImageMd === 4 || this.indexOfImageSm === 5);
+    },
+    checkDisabledPreBtnMethod: function() {
+      /**
+       * get width browser
+       */
+      let windowWidth = window.innerWidth;
+      if( windowWidth >= 992 ) {
+        return this.indexOfImageLg === 0;
+      } else if( windowWidth >= 768 ) {
+          return this.indexOfImageMd === 0;
+      } else {
+          return this.indexOfImageSm === 0;
+      }
     }
   },
-  // beforeMount() {
-  //   this.runCarousel();  bug
-  // },
-  computed: {},
   created() {
     window.addEventListener("resize", this.resetCarouselWhenResponsive);
   },
@@ -123,10 +169,11 @@ export default {
 .all-products-container {
   position: relative;
   overflow: hidden;
+
 }
 .all-products-carousel {
   flex-wrap: nowrap;
-
+  
   transition: 0.5s;
 }
 .arrow {
@@ -153,5 +200,8 @@ export default {
 }
 .arrow-left {
   left: 0;
+}
+.edit-margin {
+  margin-right: 10px;
 }
 </style>
