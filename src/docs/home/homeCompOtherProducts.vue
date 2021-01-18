@@ -1,7 +1,7 @@
 <template>
   <div  class="container"  > 
       <div class="other-title">
-          <p style="border-bottom: thin solid black"> Other Products </p> 
+          <p style="border-bottom: thin solid black;"> Other Products </p> 
       </div>
       <div class="row mt-3" >
           <homeCompProductsProduct class="col-lg-6" v-for="product in listOtherProducts" v-bind:key="product.id" v-bind:product="product" />
@@ -36,5 +36,6 @@ export default {
     font-weight: bold;
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 </style>

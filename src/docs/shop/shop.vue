@@ -152,11 +152,11 @@ export default {
           name: "Dragon Blood",
           type: "Drinkfood",
           stock: 2,
-          originPrice: 202011
+          originPrice: 333
         },
         {
           id: 4,
-          url: "ff.png",
+          url: "eggs.png",
           name: "Combo Burger",
           type: "fastFood",
           stock: 344,

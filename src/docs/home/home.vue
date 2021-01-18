@@ -1,18 +1,21 @@
 <template>
   <div>
     <homeCompAllProductsType v-bind:listAllProductsType="listAllProductsType" />
+    <!----bug--->
     <homeCompFeaturedProducts
+      v-bind:conditionList="conditionList"
       v-bind:listFeaturedProductsTitle="listFeaturedProductsTitle"
-      v-bind:listFeaturedProducts="productsChoosen"
-      v-on:getDataFromFPTitle="getDataFromFPTitle"
-      v-on:getDataFromFPP="getDataFromFPP"
-      v-bind:sumOfNumberProductsInPage="sumOfNumberProductsInPage"
+      v-bind:numberOfPage="numberOfPage"
+      v-on:getCurrentIndexFromChild="getCurrentIndexFromChild"
       class="mt-5"
     />
+    <!----bug--->
     <homeCompOtherProducts v-bind:listOtherProducts="listOtherProducts" />
     <homeCompLTRProducts v-bind:LTRListProducts="LTRListProducts" />
     <homeCompBlog v-bind:listBlog="listBlog" />
-    <homeCompCart  v-bind:numberIntoCart="numberIntoCart"/>
+    <homeCompCart />
+    {{ setLimitedForPage() }}
+    {{ setLimitedItems }}
   </div>
 </template>
 
@@ -23,7 +26,7 @@ import homeCompFeaturedProductsProduct from "./homeCompFeaturedProductsProduct";
 import homeCompOtherProducts from "./homeCompOtherProducts";
 import homeCompLTRProducts from "./homeCompLTRProducts";
 import homeCompBlog from "./homeCompBlog";
-import homeCompCart from './homeCompCart'
+import homeCompCart from "./homeCompCart";
 export default {
   name: "home",
   data() {
@@ -375,7 +378,7 @@ export default {
           desc:
             "credo in onum deum lorem lorem lorem ahihihihihi vuiqualavui lalala desc here"
         },
-         {
+        {
           id: 1,
           url: "blog2.jpg",
           date: "9/9/2020",
@@ -384,7 +387,7 @@ export default {
           desc:
             "credo in onum deum lorem lorem lorem ahihihihihi vuiqualavui lalala desc here"
         },
-         {
+        {
           id: 2,
           url: "blog3.jpg",
           date: "9/10/2020",
@@ -394,31 +397,63 @@ export default {
             "credo in onum deum lorem lorem lorem ahihihihihi vuiqualavui lalala desc here"
         }
       ],
-      dataFromFPTitle: "",
-      sumOfNumberProductsInPage: 0,
-      numberIntoCart: 0
+      /**
+       * maximum number of page
+       */
+      numberOfPage: 0,
+
+      /**
+       * current index of Page
+       */
+      currentIndex: 0,
+
+      /**
+       * list after filter some conditions
+       */
+      conditionList: []
     };
   },
   methods: {
-    //recieve data from homeCompFeaturedProducts
-    getDataFromFPTitle: function(data) {
-      this.dataFromFPTitle = data;
+    /**
+     * set limited page for list featured products
+     */
+    setLimitedForPage: function() {
+      const LIMITED_PRODUCTS = 8;
+
+      /**
+       * get maximum number of page for numberOfPage for this.numberOfPage
+       */
+      this.numberOfPage = Math.ceil(
+        this.listFeaturedProducts.length / LIMITED_PRODUCTS
+      );
     },
-    getDataFromFPP: function(data) {
-      --this.listFeaturedProducts[data.id].stock;
-      window.alert(`add to cart success!`);
-      this.numberIntoCart++;
+    /**
+     * get current index from homeCompFeaturedProducts 
+     * 
+     * then set this.currentIndex by Current index from homeCompFeaturedProducts
+     */
+    getCurrentIndexFromChild: function(index) {
+      this.currentIndex = index;
     }
   },
   computed: {
-    //filter data from getDataFromFPTitle methods
-    productsChoosen: function() {
-      let data = this.listFeaturedProducts.filter(x =>
-        x.type.match(this.dataFromFPTitle)
-      ).length;
-      this.sumOfNumberProductsInPage = Math.ceil(data / 8);
-      return this.listFeaturedProducts.filter(x =>
-        x.type.match(this.dataFromFPTitle)
+    /**
+     * set Limited items for list featured products
+     * 
+     * then divide it by current index
+     */
+    setLimitedItems: function() {
+      /**
+       * set limited items
+       */
+      const LIMITED_ITEM = 8;
+
+      /**
+       * divide limited items  by current Index
+       */
+      this.conditionList = this.listFeaturedProducts.slice(
+        this.currentIndex * LIMITED_ITEM,
+        this.currentIndex * LIMITED_ITEM + LIMITED_ITEM
       );
     }
   },

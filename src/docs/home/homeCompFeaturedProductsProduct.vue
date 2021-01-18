@@ -27,7 +27,6 @@
       <button
         class="btn btn-success"
         style="width: 100%; font-size: 1.5rem"
-        @click="sendDataToHomeFP"
         v-bind:disabled="this.product.stock === 0"
       >
         <div>Add to Cart</div>
@@ -43,13 +42,7 @@ export default {
     return {};
   },
   methods: {
-    sendDataToHomeFP: function() {
-      let data = {
-        product: this.product
-      };
-      console.log(this.product.stock);
-      this.$emit("getDataFromFPP", data.product);
-    }
+    
   },
   props: {
     product: {

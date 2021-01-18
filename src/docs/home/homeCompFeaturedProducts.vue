@@ -9,16 +9,9 @@
         <li
           class="nav-item"
           v-for="(product, index) in listFeaturedProductsTitle"
-          v-bind:key="product.id"
-          @click="
-            getIndexOfProduct(index);
-            sendDataToHome(index);
-          "
-          v-bind:class="{
-            'list-featured-products-active': checkActiveFeaturedProductsList(
-              index
-            )
-          }"
+          v-bind:key="index"
+         
+          
         >
           <a class="nav-link"> {{ product.name }}</a>
         </li>
@@ -29,44 +22,52 @@
       <div class="row m-3" id="homeFPContainer" style="height: 100%;">
         <homeCompFeaturedProductsProduct
           class="col-md-6 col-lg-3 mb-3"
-          v-for="product in listFeaturedProducts"
+          v-for="product in conditionList"
           v-bind:key="product.id"
           v-bind:product="product"
-          v-on:getDataFromFPP="getDataFromFPP"
+         
         />
       </div>
     </div>
     <!------------pagination------------>
     <ul class="pagination pagi-fp">
-      <li class="page-item " v-bind:class="{ disabled: checkDisabledPre() }">
-        <a class="page-link" @click="PrePageFP()"
+      <li 
+        @click="decreaseCurrentIndex()"
+        class="page-item "
+        v-bind:class="{ 'disabled' : isDisabledPre() }"
+        
+      >
+        <a class="page-link"
           ><i class="fas fa-chevron-left fa-1x"></i>
         </a>
       </li>
       <li
         class="page-item"
-        v-for="item in resetListIndexOfPageFP"
-        v-bind:key="item"
-        @click="
-          getIndexCurrentPage(item);
-          transferProducts(item);
-        "
+        v-for="(i, index) in numberOfPage"
+        v-bind:key="index"
+        @click="getCurrentIndex(index)"
+       
       >
         <a
-          class="page-link"
-          v-bind:class="{ 'active-current-page': checkActiveCurrentPage(item) }"
+          class="page-link" 
+           v-bind:class="{ 'active-current-page ' : isActivePagination(index) }" 
         >
-          {{ item }}
+          {{ i }}
         </a>
       </li>
 
-      <li class="page-item " v-bind:class="{ disabled: checkDisabledNext() }">
-        <a class="page-link" @click="nextPageFP()"
+      <li class="page-item "
+        @click="increaseCurrentIndex()"
+         v-bind:class="{ 'disabled' : isDisabledNext() }"
+      >
+        <a class="page-link"
           ><i class="fas fa-chevron-right"></i>
         </a>
       </li>
     </ul>
+     {{propsUpCurIndex()}}
   </div>
+ 
 </template>
 
 <script>
@@ -76,93 +77,67 @@ export default {
   name: "peatured-products-title",
   data() {
     return {
-      IndexOfProduct: 0,
-      listIndexOfPageFP: [],
-      indexCurrentPage: 1
+      currentIndex: 0
     };
   },
   methods: {
-    checkActiveFeaturedProductsList: function(index) {
-      return index === this.IndexOfProduct;
+    /**
+     * check active current index on pagination 
+     */
+    isActivePagination: function(index) {
+      return this.currentIndex === index;
     },
-    getIndexOfProduct: function(index) {
-      this.IndexOfProduct = index;
+
+    /**
+     * get current Index of pagination
+     */
+    getCurrentIndex: function(index) {
+      this.currentIndex = index;
     },
-    //event:button next page of pagination in featured list products
-    nextPageFP: function() {
-      let heightOfPFContainer = document.getElementById("homeFPContainer");
-      heightOfPFContainer.style.transform += `translateY(${-heightOfPFContainer.offsetHeight * 0.98495212038}px)`;
-      console.log(`${-heightOfPFContainer.offsetHeight}`);
-      this.indexCurrentPage++;
+    /**
+     * increase current index by 1
+     */
+    increaseCurrentIndex: function() {
+      this.currentIndex++;
     },
-       //event:button previous page of pagination in featured list products
-    PrePageFP: function() {
-      let heightOfPFContainer = document.getElementById("homeFPContainer");
-      heightOfPFContainer.style.transform += `translateY(${heightOfPFContainer.offsetHeight * 0.98495212038}px)`;
-      this.indexCurrentPage--;
+    /**
+     * decrease current index by 1
+     */
+    decreaseCurrentIndex: function() {
+      this.currentIndex--;
     },
-    // get index of current page and check active 
-    getIndexCurrentPage: function(index) {
-      this.indexCurrentPage = index;
+    /**
+     * check is disabled previous button in paginations
+     */
+    isDisabledPre:function() {
+      return this.currentIndex === 0;
     },
-    checkActiveCurrentPage: function(index) {
-      return this.indexCurrentPage === index;
+    /**
+     * check is disabled next button in paginations
+     */
+    isDisabledNext:function() {
+      return this.currentIndex === this.numberOfPage-1;
     },
-    //transform to next page of list products
-    transferProducts: function(index) {
-      let heightOfPFContainer = document.getElementById("homeFPContainer");
-      heightOfPFContainer.style.transform = `translateY(${-(heightOfPFContainer.offsetHeight - 11)*
-        (index - 1)  }px)`;
-    },
-    // check disabled of next and pre button of pagination in list products
-    checkDisabledNext: function() {
-      return this.indexCurrentPage === this.sumOfNumberProductsInPage;
-    },
-    checkDisabledPre: function() {
-      return this.indexCurrentPage === 1;
-    },
-    //send data to home.vue to filter by featured products title
-    sendDataToHome: function(index) {
-      let heightOfPFContainer = document.getElementById("homeFPContainer");
-      heightOfPFContainer.style.transform = `translateY(0)`;
-      //reset index current page
-      this.indexCurrentPage = 1;
-      //reset index of page
-      for (let i = 0; i < this.sumOfNumberProductsInPage; i++) {
-        this.listIndexOfPageFP[i] = i + 1;
-      }
-      //send data
-      let data = this.listFeaturedProductsTitle[index].type;
-      this.$emit("getDataFromFPTitle", data);
-    },
-    resetWhenRes: function() {
-      let heightOfPFContainer = document.getElementById("homeFPContainer");
-      heightOfPFContainer.style.transform = `translateY(0)`;
-        this.indexCurrentPage = 1;
-    },
-    getDataFromFPP: function(data) {
-      this.$emit('getDataFromFPP',data);
+    /**
+     * props up current index to home
+     */
+    propsUpCurIndex: function() {
+      this.$emit('getCurrentIndexFromChild',this.currentIndex);
     }
   },
   computed: {
-    resetListIndexOfPageFP: function() {
-      let temp = []
-      for (let i = 0; i < this.sumOfNumberProductsInPage; i++) {
-        temp[i] = i + 1;
-      }
-      return temp;
-    }
+    
   },
   props: {
     listFeaturedProductsTitle: {
       type: Array,
       default: []
     },
-    listFeaturedProducts: {
+    conditionList: {
       type: Array,
       default: []
     },
-    sumOfNumberProductsInPage: {
+    numberOfPage: {
       type: Number,
       default: 0
     }
@@ -199,10 +174,7 @@ export default {
   height: 5rem;
   font-size: 2rem;
 }
-.home-fp-container {
-  height: 73.5rem;
-  overflow: hidden;
-}
+
 .pagi li a {
   cursor: pointer;
 }
@@ -223,20 +195,7 @@ export default {
   border: 2px solid black;
 }
 
-@media screen and (max-width: 992px) {
-    .home-fp-container {
-      height: 146rem;
-    }
-    #homeFPContainer {
-      transform: translate(0);
-    }
-}
-@media screen and (max-width: 576px) {
-    .home-fp-container {
-      height: 292rem;
-    }
-    #homeFPContainer {
-      transform: translate(0);
-    }
+.disabled {
+  pointer-events: none;
 }
 </style>
