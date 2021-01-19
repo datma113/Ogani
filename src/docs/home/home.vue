@@ -247,6 +247,46 @@ export default {
           name: "monster eggs",
           stock: 5,
           price: 299000
+        },
+        {
+          url: "buffmeat.png",
+          id: 25,
+          type: "Meat",
+          name: "monster beef",
+          stock: 5,
+          price: 3000
+        },
+        {
+          url: "horsemeat.png",
+          id: 26,
+          type: "Meat",
+          name: "snake meat",
+          stock: 5,
+          price: 3000
+        },
+        {
+          url: "buffmeat.png",
+          id: 27,
+          type: "Meat",
+          name: "human meat",
+          stock: 64324,
+          price: 320470
+        },
+        {
+          url: "buffmeat.png",
+          id: 28,
+          type: "Meat",
+          name: "undefined meat",
+          stock: 5,
+          price: 321
+        },
+        {
+          url: "cowmeat.png",
+          id: 29,
+          type: "Meat",
+          name: "toxic meat",
+          stock: 5,
+          price: 3000
         }
       ],
       listOtherProducts: [
@@ -403,10 +443,7 @@ export default {
       currentTitle: 0,
       numberOfPage: 0,
       currentIndex: 0,
-      /**
-       * data temp from homeCompFeaturedProducts
-       */
-      dataTemp: 0
+     
     };
   },
   methods: {
@@ -419,7 +456,7 @@ export default {
         this.currentTitle = curTitle;
     },    
     setCurrentIndex: function(index) {
-       this.dataTemp = index;        
+       this.currentIndex = index;        
     },
     /**
      *
@@ -441,14 +478,13 @@ export default {
        * set default limited of items by 8
        */
         const LIMITED_ITEMS = 8
-
-      
-      let numberItems = Math.ceil((list.length / LIMITED_ITEMS)*index + LIMITED_ITEMS);
-
+ 
+      let numberItems = Math.ceil(LIMITED_ITEMS*index );
+   
       /**
        * return number of items
        */ 
-      return list.slice((list.length / LIMITED_ITEMS)*index, (list.length / LIMITED_ITEMS)*index + LIMITED_ITEMS);
+      return list.slice(numberItems, numberItems + LIMITED_ITEMS);
     }
   },
   computed: {
@@ -484,10 +520,11 @@ export default {
        *  set number of page
        */
       this.numberOfPage = this.setNumberOfPage(this.conditionList);
-
-      let temp = this.paginate(this.conditionList, this.dataTemp);
-          
-      return temp;      
+     
+     /**
+       * 2 parameters are list items after filter by title and current index of page
+       */         
+      return this.paginate(this.conditionList, this.currentIndex);    
     }
   },
   components: {
