@@ -3,10 +3,12 @@
     <homeCompAllProductsType v-bind:listAllProductsType="listAllProductsType" />
     <!----bug--->
     <homeCompFeaturedProducts
-      v-bind:conditionList="conditionList"
+      v-bind:listFeaturedProducts="finalList"
       v-bind:listFeaturedProductsTitle="listFeaturedProductsTitle"
       v-bind:numberOfPage="numberOfPage"
-      v-on:getCurrentIndexFromChild="getCurrentIndexFromChild"
+      v-on:setCurTitle="setCurTitle"
+      v-on:setCurrentIndex="setCurrentIndex"
+ 
       class="mt-5"
     />
     <!----bug--->
@@ -14,11 +16,8 @@
     <homeCompLTRProducts v-bind:LTRListProducts="LTRListProducts" />
     <homeCompBlog v-bind:listBlog="listBlog" />
     <homeCompCart />
-    {{ setLimitedForPage() }}
-    {{ setLimitedItems }}
   </div>
 </template>
-
 <script>
 import homeCompAllProductsType from "./homeCompAllProductsType";
 import homeCompFeaturedProducts from "./homeCompFeaturedProducts";
@@ -41,12 +40,12 @@ export default {
         { id: 6, name: "onion", url: "onion.png" }
       ],
       listFeaturedProductsTitle: [
-        { id: 0, type: "", name: "All" },
-        { id: 1, type: "Fruit", name: "Fruits" },
-        { id: 2, type: "Meat", name: "Meat" },
-        { id: 3, type: "Fastfood", name: "Fastfood" },
-        { id: 4, type: "Vegetables", name: "Vegetables" },
-        { id: 5, type: "Eggs", name: "Eggs" }
+        { id: 0, name: "All" },
+        { id: 1,  name: "Fruit" },
+        { id: 2,  name: "Meat" },
+        { id: 3, name: "Fastfood" },
+        { id: 4,  name: "Vegetables" },
+        { id: 5,  name: "Eggs" }
       ],
       listFeaturedProducts: [
         {
@@ -398,63 +397,97 @@ export default {
         }
       ],
       /**
-       * maximum number of page
-       */
-      numberOfPage: 0,
-
-      /**
-       * current index of Page
-       */
-      currentIndex: 0,
-
-      /**
        * list after filter some conditions
        */
-      conditionList: []
+      conditionList: [],
+      currentTitle: 0,
+      numberOfPage: 0,
+      currentIndex: 0,
+      /**
+       * data temp from homeCompFeaturedProducts
+       */
+      dataTemp: 0
     };
   },
   methods: {
     /**
-     * set limited page for list featured products
+     * get current title from homeCompFeaturedProducts
+     * 
+     * then setCurrentTitle
      */
-    setLimitedForPage: function() {
-      const LIMITED_PRODUCTS = 8;
-
-      /**
-       * get maximum number of page for numberOfPage for this.numberOfPage
-       */
-      this.numberOfPage = Math.ceil(
-        this.listFeaturedProducts.length / LIMITED_PRODUCTS
-      );
+    setCurTitle: function(curTitle) {
+        this.currentTitle = curTitle;
+    },    
+    setCurrentIndex: function(index) {
+       this.dataTemp = index;        
     },
     /**
-     * get current index from homeCompFeaturedProducts 
-     * 
-     * then set this.currentIndex by Current index from homeCompFeaturedProducts
+     *
+     *************pagination****************
      */
-    getCurrentIndexFromChild: function(index) {
-      this.currentIndex = index;
+    setNumberOfPage: function(list) {
+      /**
+       * set default limited of items by 8
+       */
+        const LIMITED_ITEMS = 8
+      
+      /**
+       * return number of page
+       */
+       return Math.ceil(list.length / LIMITED_ITEMS);
+    },
+    paginate: function(list, index) {
+       /**
+       * set default limited of items by 8
+       */
+        const LIMITED_ITEMS = 8
+
+      
+      let numberItems = Math.ceil((list.length / LIMITED_ITEMS)*index + LIMITED_ITEMS);
+
+      /**
+       * return number of items
+       */ 
+      return list.slice((list.length / LIMITED_ITEMS)*index, (list.length / LIMITED_ITEMS)*index + LIMITED_ITEMS);
     }
   },
   computed: {
     /**
-     * set Limited items for list featured products
-     * 
-     * then divide it by current index
+     * set filter list
      */
-    setLimitedItems: function() {
+    getListByTitle: function() {
       /**
-       * set limited items
+       * get name from current title
        */
-      const LIMITED_ITEM = 8;
+      let  str = this.listFeaturedProductsTitle[this.currentTitle].name.toUpperCase();
 
       /**
-       * divide limited items  by current Index
+       * filter list
        */
-      this.conditionList = this.listFeaturedProducts.slice(
-        this.currentIndex * LIMITED_ITEM,
-        this.currentIndex * LIMITED_ITEM + LIMITED_ITEM
-      );
+      if( str === 'ALL' )
+        this.conditionList = this.listFeaturedProducts;
+      else
+        this.conditionList = this.listFeaturedProducts.filter( x => x.type.toUpperCase().match(str) );     
+    },
+    /**
+     * update Final List
+     */
+   
+    finalList: function() {
+      
+      /**
+       * call computed: getListByTitle
+       */
+      this.getListByTitle;
+
+      /**
+       *  set number of page
+       */
+      this.numberOfPage = this.setNumberOfPage(this.conditionList);
+
+      let temp = this.paginate(this.conditionList, this.dataTemp);
+          
+      return temp;      
     }
   },
   components: {
@@ -467,5 +500,4 @@ export default {
   }
 };
 </script>
-
 <style scoped></style>

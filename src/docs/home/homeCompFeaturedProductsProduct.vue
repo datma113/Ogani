@@ -61,7 +61,6 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-
 .product-img {
   padding: 0 3rem;
   height: 50%;

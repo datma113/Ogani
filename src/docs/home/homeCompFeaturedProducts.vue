@@ -10,7 +10,8 @@
           class="nav-item"
           v-for="(product, index) in listFeaturedProductsTitle"
           v-bind:key="index"
-         
+          @click="getCurTitle(index)"
+          v-bind:class="{ 'list-featured-products-active ' : isActiveTitle(index) }"
           
         >
           <a class="nav-link"> {{ product.name }}</a>
@@ -22,7 +23,7 @@
       <div class="row m-3" id="homeFPContainer" style="height: 100%;">
         <homeCompFeaturedProductsProduct
           class="col-md-6 col-lg-3 mb-3"
-          v-for="product in conditionList"
+          v-for="product in listFeaturedProducts"
           v-bind:key="product.id"
           v-bind:product="product"
          
@@ -32,10 +33,9 @@
     <!------------pagination------------>
     <ul class="pagination pagi-fp">
       <li 
-        @click="decreaseCurrentIndex()"
         class="page-item "
-        v-bind:class="{ 'disabled' : isDisabledPre() }"
-        
+        v-bind:class=" {'disabled' :  isDisabledPre()}"      
+        @click="decreaseCurrentIndex()"
       >
         <a class="page-link"
           ><i class="fas fa-chevron-left fa-1x"></i>
@@ -43,29 +43,29 @@
       </li>
       <li
         class="page-item"
-        v-for="(i, index) in numberOfPage"
-        v-bind:key="index"
+         v-for="(i, index) in numberOfPage"
+      
+        v-bind:key="i"
         @click="getCurrentIndex(index)"
-       
       >
         <a
           class="page-link" 
-           v-bind:class="{ 'active-current-page ' : isActivePagination(index) }" 
+          v-bind:class=" { 'active-current-page': isActivePagination(index) } "       
         >
-          {{ i }}
+         {{i}}
         </a>
       </li>
 
       <li class="page-item "
+       v-bind:class=" {'disabled' :  isDisabledNext()}"      
         @click="increaseCurrentIndex()"
-         v-bind:class="{ 'disabled' : isDisabledNext() }"
       >
         <a class="page-link"
           ><i class="fas fa-chevron-right"></i>
         </a>
       </li>
     </ul>
-     {{propsUpCurIndex()}}
+    {{sentCurIndex}}
   </div>
  
 </template>
@@ -74,10 +74,11 @@
 import compSearchBarVue from "../../components/compSearchBar.vue";
 import homeCompFeaturedProductsProduct from "./homeCompFeaturedProductsProduct";
 export default {
-  name: "peatured-products-title",
+  name: "featured-products-title",
   data() {
     return {
-      currentIndex: 0
+      currentIndex: 0,
+      currentTitle: 0
     };
   },
   methods: {
@@ -87,7 +88,6 @@ export default {
     isActivePagination: function(index) {
       return this.currentIndex === index;
     },
-
     /**
      * get current Index of pagination
      */
@@ -95,7 +95,7 @@ export default {
       this.currentIndex = index;
     },
     /**
-     * increase current index by 1
+     * increase current index by 1    
      */
     increaseCurrentIndex: function() {
       this.currentIndex++;
@@ -119,21 +119,40 @@ export default {
       return this.currentIndex === this.numberOfPage-1;
     },
     /**
-     * props up current index to home
+     * get current title and send it to home
      */
-    propsUpCurIndex: function() {
-      this.$emit('getCurrentIndexFromChild',this.currentIndex);
+    getCurTitle: function(curTitle) {
+      /**
+       * set current title
+       */
+      this.currentTitle = curTitle;
+      
+      /**
+       * send to home
+       */
+      this.$emit('setCurTitle',curTitle);
+      this.currentIndex = 0;
+    },
+
+
+    /**
+     * check active title
+     */
+    isActiveTitle: function(index) {
+      return this.currentTitle === index;
     }
   },
   computed: {
-    
+    sentCurIndex: function() {
+      this.$emit('setCurrentIndex', this.currentIndex); 
+    }
   },
   props: {
     listFeaturedProductsTitle: {
       type: Array,
       default: []
     },
-    conditionList: {
+    listFeaturedProducts: {
       type: Array,
       default: []
     },
@@ -174,7 +193,6 @@ export default {
   height: 5rem;
   font-size: 2rem;
 }
-
 .pagi li a {
   cursor: pointer;
 }
@@ -186,7 +204,6 @@ export default {
   margin: 2rem 0.3rem;
   user-select: none;
 }
-
 .pagi-fp {
   display: flex;
   justify-content: center;
@@ -194,7 +211,6 @@ export default {
 .active-current-page {
   border: 2px solid black;
 }
-
 .disabled {
   pointer-events: none;
 }
