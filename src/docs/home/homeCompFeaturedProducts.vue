@@ -22,6 +22,7 @@
     <div class="row mt-5 home-fp-container">
       <div class="row m-3" id="homeFPContainer" style="height: 100%;">
         <homeCompFeaturedProductsProduct
+          v-on:addToCart="addToCart"
           class="col-md-6 col-lg-3 mb-3"
           v-for="product in listFeaturedProducts"
           v-bind:key="product.id"
@@ -140,6 +141,12 @@ export default {
      */
     isActiveTitle: function(index) {
       return this.currentTitle === index;
+    },
+    /**
+     * props up stock from homeCompFPP
+     */
+    addToCart: function(data) {
+      this.$emit('addToCart',data);
     }
   },
   computed: {

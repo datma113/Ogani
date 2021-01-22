@@ -8,7 +8,7 @@
       v-bind:numberOfPage="numberOfPage"
       v-on:setCurTitle="setCurTitle"
       v-on:setCurrentIndex="setCurrentIndex"
- 
+      v-on:addToCart="addToCart"
       class="mt-5"
     />
     <!----bug--->
@@ -485,6 +485,10 @@ export default {
        * return number of items
        */ 
       return list.slice(numberItems, numberItems + LIMITED_ITEMS);
+    },
+
+    addToCart: function(data) {
+      this.listFeaturedProducts[data].stock--;
     }
   },
   computed: {

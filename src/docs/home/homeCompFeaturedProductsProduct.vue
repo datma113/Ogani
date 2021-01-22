@@ -26,10 +26,11 @@
       </div>
       <button
         class="btn btn-success"
+        v-bind:class=" {'disabled' : this.product.stock === 0} "
         style="width: 100%; font-size: 1.5rem"
-        v-bind:disabled="this.product.stock === 0"
+        
       >
-        <div>Add to Cart</div>
+        <div @click="addToCart()" >Add to Cart</div>
       </button>
     </div>
   </div>
@@ -42,7 +43,15 @@ export default {
     return {};
   },
   methods: {
-    
+    /**
+     * add to cart
+     * 
+     * send props up to home 
+     */
+    addToCart: function() {
+      window.alert(`Add Successfully!`);
+      this.$emit('addToCart', this.product.id);
+    }
   },
   props: {
     product: {
@@ -82,5 +91,8 @@ export default {
 .product-border:hover {
   z-index: 999;
   border: 1px solid black;
+}
+.disabled {
+  pointer-events: none;
 }
 </style>

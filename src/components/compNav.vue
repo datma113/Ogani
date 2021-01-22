@@ -32,7 +32,7 @@
               <router-link class="nav-link" href="#" to="/blogs">Blogs</router-link>
         </li>
         <li class="nav-item p-xl-4 p-lg-3 ">
-          <a class="nav-link" href="#">Contact</a>
+          <router-link class="nav-link" href="#" to="/contact-us">Contact</router-link>
         </li>
       </ul>
       <div class="d-none d-lg-flex  col-lg-3 col-xl-3 nav-phone">
